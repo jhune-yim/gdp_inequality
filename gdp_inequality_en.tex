@@ -1,0 +1,203 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{2em}
+\title{Mean and Median Income:\\What Their Gap Reveals About Inequality}
+\author{moi}
+\date{English Version 0.4 --- September 29, 2026\\\small Original essay in Korean: July 20, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The ratio of mean to median income measures how far average income stands above the middle of a distribution. I argue that its interpretation depends on both the income concept and the shape of the distribution. If incomes are lognormally distributed, the ratio determines the Gini coefficient; in general it does not, and a progressive transfer can leave the ratio unchanged or even raise it. Published U.S.\ household income estimates for 2017--2023 illustrate the practical consequence. In every year, the Gini coefficient implied by the lognormal formula lies 0.035--0.039 below the published value, a gap several times larger than the full observed range of the published Gini over the period. The two series move in the same direction in five of six annual comparisons, but this descriptive agreement does not establish reliable tracking of inequality changes. The ratio is therefore well suited to comparing the growth of mean and median income, but claims about the level of inequality, or about redistribution, require further evidence.
+\end{abstract}
+
+Economic growth raises a question that an aggregate alone cannot answer: how much of the improvement reaches the middle of the income distribution? Comparing mean and median income is a natural starting point. The mean responds to every income, whereas the median identifies the income at the middle rank; their ratio therefore measures the proportional distance between the two.
+
+In this essay I argue that the mean--median ratio is a useful descriptive statistic whose meaning depends on both the income concept and the shape of the distribution. Section~\ref{sec:concept} sets out the conditions under which the comparison is meaningful. Section~\ref{sec:benchmark} derives a lognormal benchmark in which the ratio determines the Gini coefficient, and Section~\ref{sec:counter} uses simple counterexamples to show what the ratio misses outside that benchmark. Section~\ref{sec:data} compares the benchmark with published U.S.\ data, and Section~\ref{sec:implications} considers the implications for the analysis of growth and redistribution.
+
+%%%%%
+
+\section{Compare like with like}
+\label{sec:concept}
+
+Gross domestic product (GDP) per capita measures domestic production per person, not the income that households receive. Measured from the income side, GDP includes components that are not included in current household money income, such as consumption of fixed capital (depreciation), taxes on production and imports less subsidies, and undistributed corporate profits \cite{bea}. Household resources, in turn, reflect transfers, direct taxes, and income flows across borders. A ratio of GDP per capita to median household income would thus combine an output measure per person with an income measure per household, mixing both income concepts and units of observation. Dividing median household income by average household size would not, in general, yield median income across individuals. Such a ratio has no straightforward interpretation as a measure of dispersion.
+
+A meaningful comparison requires the mean and the median to share the same income definition, population, period, and weights. For comparisons of living standards, a common choice is \emph{equivalised disposable household income}: the OECD divides household disposable income by the square root of household size and assigns the result to each household member \cite{oecd}. This yields a distribution across people, which answers a different question from a distribution across households weighted by household survey weights.
+
+The empirical example in Section~\ref{sec:data} uses U.S.\ \emph{household money income}, which is measured before taxes, includes cash transfers, excludes capital gains and noncash benefits, and is not adjusted for household size \cite{census}. The mean, median, and Gini coefficient reported there all refer to this definition; none of them should be read as a measure of the disposable resources available to an individual.
+
+%%%%%
+
+\section{A benchmark that makes the assumption visible}
+\label{sec:benchmark}
+
+Let $X$ denote income, with finite positive mean $a=\mathbb{E}[X]$ and positive median $m$, and define
+\begin{equation}
+R=\frac{a}{m}.
+\label{eq:ratio}
+\end{equation}
+Throughout, $\log$ denotes the natural logarithm. Multiplying every income by the same positive constant leaves $R$ unchanged but rescales the absolute gap $a-m$ by that constant, so a widening gap in dollars need not imply a widening proportional gap. The ratio is not, however, invariant to additions: giving every person the same positive amount lowers $R$ whenever $a>m$, a property that becomes relevant for the equal transfers discussed in Section~\ref{sec:politics}. If the median is zero or negative, $R$ loses its usual interpretation.
+
+Suppose now that the entire distribution is lognormal:
+\begin{equation}
+\log X\sim N(\mu,\sigma^2),\qquad \sigma>0.
+\end{equation}
+Because exponentiation is monotone, the median of $X$ is the exponential of the median of $\log X$, and the moment-generating function of the normal distribution gives the mean. Hence
+\begin{equation}
+m=e^\mu,\qquad a=e^{\mu+\sigma^2/2},\qquad R=e^{\sigma^2/2}.
+\end{equation}
+For nonnegative income with positive finite mean, the Gini coefficient can be written as
+\begin{equation}
+G=\frac{\mathbb{E}|X-X'|}{2a},
+\end{equation}
+where $X'$ is an independent copy of $X$. In words, the Gini coefficient is the expected absolute difference between two randomly drawn incomes, divided by twice the mean. For the lognormal distribution it takes the well-known form \cite{aitchison}
+\begin{equation}
+G=2\Phi\!\left(\frac{\sigma}{\sqrt{2}}\right)-1,
+\end{equation}
+where $\Phi$ is the standard normal cumulative distribution function. For completeness, the derivation is short. The lognormal Lorenz curve is $L(p)=\Phi(\Phi^{-1}(p)-\sigma)$, and the substitution $p=\Phi(z)$ gives
+\[
+\int_0^1L(p)\,dp=\mathbb{E}[\Phi(Z-\sigma)]
+=\Pr(U-Z\leq-\sigma)=\Phi(-\sigma/\sqrt{2}),
+\]
+where $U$ and $Z$ are independent standard normal variables. The result follows from $G=1-2\int_0^1L(p)\,dp$.
+
+Eliminating $\sigma$ yields the restriction that the model imposes:
+\begin{equation}
+\boxed{G_{\mathrm{LN}}(R)=2\Phi\!\left(\sqrt{\log R}\right)-1,
+\qquad R\geq1.}
+\label{eq:lognormal}
+\end{equation}
+The boundary $R=1$ corresponds to the degenerate limit $\sigma=0$, in which all incomes are equal and $G=0$. Within this family, a single dispersion parameter determines both summaries, so the ratio carries all the information contained in the Gini coefficient. Whether the restriction holds for a given income distribution is an empirical question. A good lognormal fit around the median cannot settle it, because the mean and the Gini coefficient also depend on the rest of the distribution, including its upper tail.
+
+%%%%%
+
+\section{What two summaries leave out}
+\label{sec:counter}
+
+Two summary statistics cannot describe a whole distribution, and simple examples show how much escapes them. Consider two equally weighted populations,
+\[
+A=(1,2,3,4,10),\qquad B=(1,2,3,6,8).
+\]
+Both have mean $4$, median $3$, and $R=4/3$. Their Gini coefficients, computed with the population formula
+\[
+G=\frac{\sum_{i=1}^{n}\sum_{j=1}^{n}|x_i-x_j|}{2n^2a},
+\]
+nonetheless differ: $G_A=0.40$ and $G_B=0.36$. Moving from $A$ to $B$ transfers two units from the richest person to the second-richest without reversing their ranks. The cumulative income shares of the poorest one, two, and three people are unchanged, and that of the poorest four rises, so $B$ Lorenz-dominates $A$. Yet $R$ does not move. The ratio therefore violates the strict Pigou--Dalton transfer principle, under which such a transfer must reduce measured inequality.
+
+The failure is not merely one of insensitivity. Let $C=(1,2,4,5,8)$, whose mean and median both equal $4$, so that $R=1$ and $G_C=0.34$. Moving half a unit from the median person to the poorest gives
+\[
+C'=(1.5,\,2,\,3.5,\,5,\,8),
+\]
+a progressive transfer that preserves ranks. The mean is unchanged, but the median falls to $3.5$, so $R$ rises to about $1.14$ while the Gini coefficient falls to $0.32$. A progressive transfer can thus move the ratio in the wrong direction, which violates even the weak form of the principle, under which measured inequality must not rise.
+
+The population $C$ also shows that $R=1$ does not indicate equality: its mean equals its median, although its incomes differ considerably. The source of these limitations is that $R$ depends on the distribution only through its mean and a single quantile. Mean-preserving transfers within the lower half, or within the upper half, leave both summaries unchanged provided that the median observation itself is unaffected; a transfer involving the median person, by contrast, can shift the median and hence the ratio.
+
+%%%%%
+
+\section{A comparison with U.S. household data}
+\label{sec:data}
+
+Table~\ref{tab:income} draws on the Census Bureau report \emph{Income in the United States: 2023}, published in 2024; all figures come from this single publication vintage \cite{census}. The series begins with the 2017 estimate based on the updated processing system, which the report treats as comparable with estimates for later years.
+
+Comparability nevertheless requires two qualifications. The 2020 Census-based population controls were introduced with the 2022 Current Population Survey Annual Social and Economic Supplement (CPS ASEC) and applied retrospectively to the 2021 CPS ASEC. Since each survey collects income for the preceding calendar year, the revised controls apply to income years 2020 onward in this table \cite{censuscontrols}. The 2019--2020 comparison therefore crosses population-control bases even within a single publication vintage. Separately, Census research documents increased nonresponse bias in the 2020--2024 CPS ASEC surveys, which collected income for 2019--2023 \cite{censusnonresponse}. The initial pandemic disruption and the subsequent persistence of nonresponse bias qualify comparisons involving these income years.
+
+\begin{table}[htbp]
+\centering
+\caption{Household money income and two measures of dispersion, 2017--2023}
+\label{tab:income}
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Income year & Mean (\$) & Median (\$) & $R$ & Published $G$ & $G_{\mathrm{LN}}(R)$ \\
+\midrule
+2017 & 107,300 & 74,810 & 1.434 & 0.489 & 0.452 \\
+2018 & 108,000 & 75,790 & 1.425 & 0.486 & 0.448 \\
+2019 & 115,900 & 81,210 & 1.427 & 0.484 & 0.449 \\
+2020 & 114,000 & 79,560 & 1.433 & 0.488 & 0.451 \\
+2021 & 114,600 & 79,260 & 1.446 & 0.494 & 0.456 \\
+2022 & 110,600 & 77,540 & 1.426 & 0.488 & 0.449 \\
+2023 & 114,500 & 80,610 & 1.420 & 0.485 & 0.446 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.6em}
+\begin{minipage}{\textwidth}
+\footnotesize
+\textit{Notes:} Mean and median household income are in 2023 dollars and are shown as published. $R$ and $G_{\mathrm{LN}}(R)$ are computed from these published values, the latter using equation~\eqref{eq:lognormal}, and are rounded to three decimals; $G_{\mathrm{LN}}(R)$ is not a Census estimate. The 2017 row uses the estimates based on the updated processing system (footnote~4 in Table~A-2 and footnote~2 in Table~A-4b). A script that reproduces the derived columns accompanies this essay.\\
+\textit{Source:} Census P60-282, Table A-2 (p.~16) and Table A-4b (p.~34), all households \cite{census}.
+\end{minipage}
+\end{table}
+
+The table supports three observations. First, between 2017 and 2023 real mean income rose by about 6.7 percent and real median income by about 7.8 percent, so the proportional gap narrowed: $R$ fell by about 1.0 percent. Over the same period, the absolute gap widened from \$32,490 to \$33,890. A widening dollar gap can therefore coexist with faster growth at the median.
+
+Second, the lognormal formula understates the published Gini coefficient in every year, by 0.035 to 0.039. In 2023, for example, $R\simeq1.420$ implies $G_{\mathrm{LN}}\simeq0.446$, compared with a published value of $0.485$. Read in the other direction, a lognormal distribution with the published 2023 Gini would require $R\simeq1.53$. For scale, this discrepancy can be compared with the variation in the published Gini. Over the whole period the published Gini ranges only from 0.484 to 0.494, so the discrepancy in levels is between three and four times the full observed range of 0.010.
+
+Third, the two series nevertheless change in the same direction in five of the six year-to-year comparisons, the exception being 2018--2019, and both are lower in 2023 than in 2017. Within this window, the lognormal conversion thus understates the published Gini level despite the agreement in most annual directions. This descriptive agreement does not establish that the ratio reliably tracks changes in broader inequality. Because many of these annual changes are small relative to the sampling error of the published estimates, this agreement should not be pressed too far.
+
+These comparisons are descriptive checks based on published point estimates. Sampling uncertainty, rounding, the treatment of nonpositive incomes, and the shape of the distribution all affect them. The calculation does not identify the source of the discrepancy, nor is it a formal test of lognormality; testing this restriction statistically would require an account of the joint sampling uncertainty in the estimated mean, median, and Gini, which could be obtained from the underlying microdata and survey design. Seven annual observations cannot, moreover, support any claim about long-run trends. The contribution of the exercise is narrower but still useful: it quantifies the cost of treating a model-specific relationship as an identity.
+
+%%%%%
+
+\section{Economic implications: growth and redistribution}
+\label{sec:implications}
+
+\subsection{How the ratio connects average and median growth}
+
+Under a fixed income concept, the ratio yields an exact accounting identity:
+\begin{equation}
+\Delta\log m=\Delta\log a-\Delta\log R.
+\label{eq:growth}
+\end{equation}
+A rising $R$ means that median income grows more slowly than mean income, and a falling $R$ that it grows faster; no distributional assumption is required. In the U.S.\ example, log mean income rose by 0.065 and log median income by 0.075 between 2017 and 2023; equivalently, $\log R$ fell by about 0.010.
+
+The identity turns a vague question about shared prosperity into a precise one: by how much does median income growth differ from mean income growth under a common definition? It does not, however, explain the difference. Changes in employment, household composition, earnings, capital income, and transfers can all reshape the distribution. Comparisons of wages with labour productivity raise a separate set of measurement issues, including consistent units of working time and matched price deflators. Nor can GDP per capita replace $a$ in equation~\eqref{eq:growth} without losing the identity's interpretation in terms of household income.
+
+%%%%%
+
+\subsection{Why the political mechanism requires more information}
+\label{sec:politics}
+
+The ratio bears directly on the redistribution mechanism in the model of Meltzer and Richard \cite{meltzer}. In that model, a proportional tax on earnings finances an equal lump-sum transfer, and voters take into account how taxation affects labour supply. Under the model's assumptions, the voter with median productivity is decisive, and, holding the relevant labour-supply responses constant, a higher ratio of mean earnings to that voter's earnings raises the equilibrium tax rate.
+
+Applying this prediction requires the model's tax base and the identity of its decisive voter, and a generic household-income ratio supplies neither. The Census money-income measure used above already includes cash transfers, and households are not individual voters. A test of the political prediction therefore needs income and participation measures that correspond to the model, together with a direct measure of redistribution.
+
+The empirical literature underlines the need for this specificity. Georgiadis and Manning show that a rise in income inequality in the United Kingdom over 1983--2004 was not accompanied by increased redistribution, and use attitudinal data to investigate why \cite{georgiadis}. Ostry, Berg, and Tsangarides, by contrast, report a positive cross-country association between market-income inequality and the extent of redistribution \cite{ostry}. Because these studies examine different settings and measures, their results should not be read as competing estimates of a single causal effect.
+
+Lindert's Robin Hood paradox describes a historical pattern in which redistribution toward the poor is weakest where need is greatest, including societies with lower average incomes and greater poverty and pre-fiscal inequality \cite[p.~15]{lindert}. Separately, comparisons using disposable-income inequality require care because taxes and transfers themselves alter the observed distribution. Using income before taxes and transfers avoids this direct accounting effect, but does not by itself identify a causal relationship between inequality and redistribution.
+
+%%%%%
+
+\section{Conclusion}
+
+The mean--median ratio earns its place in distributional analysis by answering a clear question: how far does average income stand from the middle, and how does that distance change over time? Its invariance to scale makes proportional comparisons straightforward, and its growth identity links gains in average household income to gains at the median.
+
+Any broader interpretation, however, requires information about the rest of the distribution. The counterexamples show that a progressive transfer can leave the ratio unchanged or even raise it. The U.S.\ comparison shows that converting the ratio into a Gini coefficient through the lognormal formula understates the published level by a margin several times larger than its full observed range over the period. Agreement in five of six annual directions does not establish that the ratio reliably tracks broader inequality. A sound assessment therefore combines the ratio with real median income, a broad inequality measure such as the Gini coefficient, and indicators that locate changes within the distribution, such as top income shares or percentile ratios. Economic explanations can then be tested against these observations. This approach retains the clarity of the ratio while making its assumptions explicit.
+
+\begin{thebibliography}{99}
+\small
+\bibitem{aitchison} Aitchison, J., and J.~A.~C. Brown. 1957. \emph{The Lognormal Distribution, with Special Reference to Its Uses in Economics}. Cambridge: Cambridge University Press.
+\bibitem{bea} U.S. Bureau of Economic Analysis. 2018. ``Income Approach.'' Glossary. \href{https://www.bea.gov/help/glossary/income-approach}{Official definition}.
+\bibitem{census} Guzman, Gloria, and Melissa Kollar. 2024. \emph{Income in the United States: 2023}. Current Population Reports P60-282. U.S. Census Bureau. Tables A-2 and A-4b; Appendices A and C. \href{https://www2.census.gov/library/publications/2024/demo/p60-282.pdf}{Fixed-vintage report and tables}.
+\bibitem{censuscontrols} Shrider, Em, Jessica Semega, and Katherine K. Starkey. 2022. \emph{Effects of 2020 Census-Based Population Controls on 2020 Income, Poverty, Supplemental Poverty, and Health Insurance in the United States Estimates}. SEHSD Working Paper 2022-14. U.S. Census Bureau. \href{https://www.census.gov/content/dam/Census/library/working-papers/2022/demo/sehsd-wp2022-14.pdf}{Working paper}.
+\bibitem{censusnonresponse} Bee, Adam, and Jonathan Rothbaum. 2024. ``Using Administrative Data to Evaluate Nonresponse Bias in the 2024 Current Population Survey Annual Social and Economic Supplement.'' U.S. Census Bureau, September 10. \href{https://www.census.gov/newsroom/blogs/research-matters/2024/09/administrative-data-nonresponse-bias-cps-asec.html}{Research Matters}.
+\bibitem{georgiadis} Georgiadis, Andreas, and Alan Manning. 2012. ``Spend It Like Beckham? Inequality and Redistribution in the UK, 1983--2004.'' \emph{Public Choice} 151(3--4): 537--563. \href{https://doi.org/10.1007/s11127-010-9758-7}{doi:10.1007/s11127-010-9758-7}.
+\bibitem{lindert} Lindert, Peter H. 2004. \emph{Growing Public: Social Spending and Economic Growth since the Eighteenth Century}. Vol.~1. Cambridge: Cambridge University Press.
+\bibitem{meltzer} Meltzer, Allan H., and Scott F. Richard. 1981. ``A Rational Theory of the Size of Government.'' \emph{Journal of Political Economy} 89(5): 914--927. \href{https://doi.org/10.1086/261013}{doi:10.1086/261013}.
+\bibitem{oecd} OECD. 2024. ``Household Income.'' In \emph{Society at a Glance 2024}. \href{https://www.oecd.org/en/publications/society-at-a-glance-2024_918d8db3-en/full-report/household-income_3ee61044.html}{Definitions and measurement}.
+\bibitem{ostry} Ostry, Jonathan D., Andrew Berg, and Charalambos G. Tsangarides. 2014. \emph{Redistribution, Inequality, and Growth}. IMF Staff Discussion Note 14/02. \href{https://doi.org/10.5089/9781484352076.006}{doi:10.5089/9781484352076.006}.
+\end{thebibliography}
+\end{document}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: t
+%%% End:

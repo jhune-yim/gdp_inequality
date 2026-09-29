@@ -1,0 +1,7 @@
+# Mean and Median Income: What Their Gap Reveals About Inequality
+
+This expository paper incorporates from the origianl paper, written in Korean a few months back. This edition has been updated from the Korean ediiton.
+
+## Files
+- `gdp_inequalty.tex': standalone English manuscript. Compile: lualatex
+- `reproduce_table.py': Python3 code reproducing the derived table columns, growth calculation, and transfer counterexamples. Uses the Python standard library(tested in Python 3.12). Ths script uses manually transcribed published estimates from Census P60-282, Tables A-2 and A-4b. Income is in 2023 dollars. Derived values are calculated before rounding. The 2017 inputs use the updated processing system.
